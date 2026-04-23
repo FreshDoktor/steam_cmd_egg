@@ -15,7 +15,7 @@ RUN dpkg --add-architecture i386 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-ENV STEAMCMD_DIR="/home/container/steamcmd"
+ENV STEAMCMD_DIR="/opt/steamcmd"
 
 RUN mkdir -p "${STEAMCMD_DIR}" \
     && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" \
