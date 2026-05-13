@@ -6,6 +6,11 @@ on:
       - main
     paths:
       - "yolks/dotnet_8_steamcmd/Dockerfile"
+      - ".github/workflows/docker-publish.yml"
+  schedule:
+    # Sonntags 03:00 UTC — Rebuild fängt Updates der Base-Image
+    # (ghcr.io/parkervcp/yolks:dotnet_8) und der apt-Pakete auf
+    - cron: "0 3 * * 0"
   workflow_dispatch:
 
 env:

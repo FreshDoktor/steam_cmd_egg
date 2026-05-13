@@ -1,7 +1,7 @@
 FROM ghcr.io/parkervcp/yolks:dotnet_8
 
 LABEL maintainer="custom"
-LABEL org.opencontainers.image.description="dotnet 8 runtime with SteamCMD for tModLoader Workshop support"
+LABEL org.opencontainers.image.description="dotnet 8 runtime with 32-bit support for SteamCMD (SteamCMD itself is installed per-server by the egg)"
 
 USER root
 
@@ -14,15 +14,6 @@ RUN dpkg --add-architecture i386 \
         curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-ENV STEAMCMD_DIR="/opt/steamcmd"
-
-RUN mkdir -p "${STEAMCMD_DIR}" \
-    && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" \
-        | tar -xzvf - -C "${STEAMCMD_DIR}" \
-    && chown -R container:container "${STEAMCMD_DIR}"
-
-RUN su -c "${STEAMCMD_DIR}/steamcmd.sh +quit" container || true
 
 USER container
 ENV HOME=/home/container
